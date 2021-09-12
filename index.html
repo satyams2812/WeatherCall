@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  
+    <title>weather</title>
+</head>
+<body>
+    
+<script>
+ 
+</script>
+
+<div class="search">
+
+    <input type="text" class="search-field food" id="text-search" placeholder="Enter City Name"  >
+    <button class="search-btn" id = "searchbtn" type="button" onclick="search(); "> Search</button>
+  
+</div>
+
+
+<script>
+     
+   
+    function search()
+    {
+        let output = '';
+     let v = document.getElementById('text-search').value;
+     
+
+     var options = {
+  method: 'GET',
+  url: 'https://weatherapi-com.p.rapidapi.com/current.json',
+  params: {q: v},
+  headers: {
+    'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
+    'x-rapidapi-key': '338b43f7damsh59f0322d452ebf6p119924jsn01c91fb5f2c2'
+  }
+};
+
+
+axios.request(options).then(function (response) {
+	 console.log(response.data.current.condition.icon)
+    output+= ` 
+       
+               <p> Name ->  ${response.data.location.name} </p>
+                <br>
+               <p> Country -> ${response.data.location.country} </p>
+               <br>
+               <p>TimeZone -> ${response.data.location.tz_id} </p>
+               <br>
+               <p>LocalTime -> ${response.data.location.localtime} </p>            
+              <img src= http:${response.data.current.condition.icon} /> 
+                <p>Temp Celicus -> ${response.data.current.temp_c} </p>            
+                <p>Condition -> ${response.data.current.condition.text} </p>      
+                <p>Humidity -> ${response.data.current.humidity} </p>   
+                <p>cloud -> ${response.data.current.cloud} </p>      
+         
+         `
+
+         document.getElementById('title').innerHTML += output;
+
+}).catch(function (error) {
+	console.error(error);
+});
+
+
+        
+             document.getElementById('title').innerHTML += output;
+    
+
+ 
+  
+}
+
+  
+</script>
+
+
+
+</script>
+<section>
+    <div class="container">
+        <div class="row" id="title">
+          <div class="col-sm">
+           
+         
+            </div>
+          </div>
+          </div>
+
+</section>
+  
+
+
+
+
+</body>
+</html>
